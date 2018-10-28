@@ -7,6 +7,12 @@ pipeline{
         maven 'mvn-3.5.2'
 
     }
+
+    environment {
+            SPRING_APPLICATION_NAME = 'ms-account-service'
+            SPRING_CLOUD_CONFIG_URI    = 'http://mc-config-service.development.svc.cluster.local:8888'
+            SPRING_PROFILES_ACTIVE = 'dev'
+        }
     stages{
 
 

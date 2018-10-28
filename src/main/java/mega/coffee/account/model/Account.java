@@ -40,6 +40,8 @@ public class Account {
 
     private GeoJsonPoint lastLoginLocation;
 
+    private int age;
+
 
 
 

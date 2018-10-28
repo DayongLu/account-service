@@ -1,0 +1,33 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: mc-account-service
+  namespace: development
+spec:
+  selector:
+    matchLabels:
+      app: mc-account-service
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: mc-account-service
+    spec:
+      imagePullSecrets:
+      - name: image-registry-secret
+      containers:
+      - name: mc-account-service
+        imagePullPolicy: Always
+        image: registry-vpc.cn-beijing.aliyuncs.com/megacoffee/mc-account-service:latest
+        ports:
+        - containerPort: 8888
+          name: restapi
+        env:
+        - name: SPRING_APPLICATION_NAME
+          value: "mc-account-service"
+        - name: SPRING_CLOUD_CONFIG_URI
+          value: "http://mc-config-service.development.svc.cluster.local:8888"
+        - name: SPRING_PROFILES_ACTIVE
+          value: "dev"
+        - name: SERVER_PORT
+          value: "8080"
